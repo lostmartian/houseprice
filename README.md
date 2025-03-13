@@ -16,17 +16,19 @@ The service is hosted live on Render: [https://houseprice-3mmi.onrender.com](htt
 ## Repository Structure
 
 ```
-├── app.py             # Flask application for serving the model
-├── explore.py           # Script for data exploration and analysis
-├── preprocessing.py     # Script for data preprocessing
-├── train.py             # Script for model training and evaluation
-├── model_results.csv    # CSV file containing model evaluation metrics
+├── app.py # Flask application for serving the model
+├── preprocessing/ # Directory for preprocessing scripts
+│ ├── explore.py # Script for data exploration and analysis
+│ └── preprocessing.py # Script for data preprocessing
+├── training/ # Directory for training scripts and results
+│ ├── train.py # Script for model training and evaluation
+│ ├── model_results.csv # CSV file containing model evaluation metrics
+│ └── plots/ # Directory containing generated plots
+│ └── ... # Various plots for data analysis and model comparison
 ├── dataset
-│   └── Housing.csv          # Original dataset
-│   └── Housing_Preprocessed.csv # Preprocessed dataset
-├── plots                # Directory containing generated plots
-│   ├── ...              # Various plots for data analysis and model comparison
-└── README.md          # This file
+│ ├── Housing.csv # Original dataset
+│ └── Housing_Preprocessed.csv # Preprocessed dataset
+└── README.md # This file
 ```
 
 ## Workflow Details
