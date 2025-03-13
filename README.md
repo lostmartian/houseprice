@@ -161,32 +161,6 @@ To get a prediction, send a POST request to `/predict` with a JSON payload conta
 
 The model training process involved hyperparameter tuning and evaluation of several regression models. The best-performing model was selected based on its R² score.  For detailed model performance metrics, please refer to `model_results.csv`.
 
-## Contributing
-
-Contributions to this project are welcome. Feel free to fork the repository and submit pull requests.
-
-## License
-
-This project is licensed under the MIT License.
-```
-
-**Key Improvements and Explanations:**
-
-* **Clear Structure:** The README is organized with headings and subheadings for better readability.
-* **Detailed Workflow:** Each script's purpose and key steps are explained, referencing the provided files.
-* **Code Snippets:** Code snippets are included to illustrate how to run the application and use the prediction service.
-* **Emphasis on Render Deployment:** The Render hosting is prominently mentioned with a direct link.
-* **Requirements Note:** It prompts the user to create a `requirements.txt` file and provides a basic example.
-* **Model Results Reference:** It guides the user to the `model_results.csv` file for detailed performance metrics.
-* **Contribution and License:** Standard sections for open-source projects.
-* **File Paths:** Uses consistent file paths to match your project structure.
-* **Input Data Explanation:** It explains how the `preprocess_input` function works in `app.py`[cite: 1].
-
-
-
-
-
-
 
 
 
