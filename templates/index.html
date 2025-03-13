@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f5f5f7;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+            width: 400px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #005ecb;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>House Price Prediction</h2>
+    <div class="container">
+        <form id="prediction-form">
+            <div class="form-group">
+                <label for="area">Area (sqft):</label>
+                <input type="number" id="area" name="area" min="500" max="10000" value="3000">
+            </div>
+            
+            <div class="form-group">
+                <label for="mainroad">Main Road:</label>
+                <select id="mainroad">
+                    <option value="false">No</option>
+                    <option value="true" selected>Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="guestroom">Guest Room:</label>
+                <select id="guestroom">
+                    <option value="false" selected>No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="basement">Basement:</label>
+                <select id="basement">
+                    <option value="false" selected>No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="hotwaterheating">Hot Water Heating:</label>
+                <select id="hotwaterheating">
+                    <option value="false" selected>No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="airconditioning">Air Conditioning:</label>
+                <select id="airconditioning">
+                    <option value="false">No</option>
+                    <option value="true" selected>Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="prefarea">Preferred Area:</label>
+                <select id="prefarea">
+                    <option value="false">No</option>
+                    <option value="true" selected>Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="furnishingstatus">Furnishing Status:</label>
+                <select id="furnishingstatus">
+                    <option value="furnished" selected>Furnished</option>
+                    <option value="semi_furnished">Semi-Furnished</option>
+                    <option value="unfurnished">Unfurnished</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bathrooms">Number of Bathrooms:</label>
+                <select id="bathrooms">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="stories">Number of Stories:</label>
+                <select id="stories">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="parking">Parking Spaces:</label>
+                <select id="parking">
+                    <option value="0">0</option>
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bedrooms">Number of Bedrooms:</label>
+                <select id="bedrooms">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict Price</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("prediction-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            // Get form values with simplified structure
+            const features = {
+                area: Number(document.getElementById("area").value),
+                mainroad: document.getElementById("mainroad").value === "true",
+                guestroom: document.getElementById("guestroom").value === "true",
+                basement: document.getElementById("basement").value === "true",
+                hotwaterheating: document.getElementById("hotwaterheating").value === "true",
+                airconditioning: document.getElementById("airconditioning").value === "true",
+                prefarea: document.getElementById("prefarea").value === "true",
+                furnishingstatus: document.getElementById("furnishingstatus").value,
+                bathrooms: Number(document.getElementById("bathrooms").value),
+                stories: Number(document.getElementById("stories").value),
+                parking: Number(document.getElementById("parking").value),
+                bedrooms: Number(document.getElementById("bedrooms").value)
+            };
+            
+            // Show loading message
+            document.getElementById("result").innerText = "Calculating...";
+            
+            try {
+                let response = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ "features": features })
+                });
+                
+                let result = await response.json();
+                
+                if (result.predicted_price) {
+                    // Format the price with commas for thousands
+                    const formattedPrice = new Intl.NumberFormat('en-IN', {
+                        style: 'currency',
+                        currency: 'INR',
+                        maximumFractionDigits: 0
+                    }).format(result.predicted_price);
+                    
+                    document.getElementById("result").innerText = `Predicted Price: ${formattedPrice}`;
+                } else {
+                    document.getElementById("result").innerText = `Error: ${result.error}`;
+                }
+            } catch (error) {
+                document.getElementById("result").innerText = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
